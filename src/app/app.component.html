@@ -1,0 +1,319 @@
+<!-- <mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened>
+    <form [formGroup]="myForm">
+
+      
+        <h4>Select Certificate</h4>
+        <div class="select">
+          <input type="file"  accept="image/png, image/gif, image/jpeg" (change)="selectFile($event)" formControlName="image"/>
+          <button  (click)="rotate()">r</button>
+        </div>
+
+        <br>
+        <h4>Upload Excel Sheet</h4>
+        <input type="file" accept=".xlsx, .xls" (change)="onFileChange($event)" formControlName="sheet"/>
+        <mat-form-field appearance="fill">
+          <mat-label>Select the Sheet</mat-label>
+          <mat-select   formControlName="sheet" [(value)]="selectedSheet" (selectionChange)="selectChange()" >
+            <mat-option *ngFor="let sheetlist of sheetlists | keyvalue"  [value]="sheetlist.key"> {{ sheetlist.value }} </mat-option>
+          </mat-select>
+  
+        </mat-form-field>
+        <button (click)="salutation()">  salutation</button>
+
+
+        <h4>Resize Certificate</h4>
+        <div class="select" style="font-size: 15px">
+          <mat-form-field class="example-full-width">
+            <input  matInput type="number" maxlength="4" placeholder="Height" #height />
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input   matInput type="number" maxlength="4" placeholder="Width"  #width />
+          </mat-form-field>
+          <button  mat-raised-button color="primary" (click)='resize(height.value, width.value)' >Resize</button>
+
+        </div>
+
+        
+
+        <h4>Select Fonts</h4>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Select a font</mat-label>
+          <input type="text"
+                 placeholder="Select a font"
+                 aria-label="Number"
+                 matInput
+                 formControlName="fonts" 
+                  #inputval
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+            *ngFor="let fonts of filteredOptions"
+            [value]="fonts"
+            >{{ fonts }}</mat-option
+          >
+          </mat-autocomplete>
+        
+        </mat-form-field>
+
+        <br>
+        
+        <br>
+        <button (click)="myFunction()" ></button>
+        <button (click)="update(inputval.value)" >change</button>
+        <h4>Edit Font</h4>
+        <div style="font-size: 15px">
+          <button (click)="bold()">
+            <mat-icon>format_bold</mat-icon>
+          </button>
+          <button (click)="italic()">
+            <mat-icon> format_italic </mat-icon>
+          </button>
+          <button (click)="underline()">
+            <mat-icon>format_underlined</mat-icon>
+          </button>
+
+          <mat-form-field appearance="fill" class="example-full">
+            <mat-label>Size</mat-label>
+            <mat-select [(value)]="selectedFontSize">
+              <mat-option
+                *ngFor="let fontsize of fontSizes"
+                [value]="fontsize"
+                >{{ fontsize }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <input id="fontss" type="file" (change)="selectFont($event)" >
+          <mat-form-field class="example-full">
+            <mat-label>Color</mat-label>
+            <input
+              matInput
+              type="text"
+              
+              placeholder="Color"
+              #colors
+             
+              
+            />
+          </mat-form-field>
+  
+        
+        </div>
+ 
+      <br />
+    </form>
+    <button  (click)="color(colors.value)" >color</button>
+    <p #pdfNames id="pdfnames" style="visibility: hidden"></p>
+
+  <button (click)="setposition()" > set </button>
+
+    <button
+    id="clickMe"
+    class="k-button"
+    (click)="pdf.saveAs(pdfNames.innerHTML)"
+    style="visibility: hidden"
+  ></button>
+
+  <button (click)="exportss()">Export as PDF</button>
+  </mat-sidenav>
+
+  <mat-sidenav-content id="sidebar">
+    <kendo-pdf-export  #pdf paperSize="auto" margin="2cm" [ngStyle]="{ 'font-family':fontFamilyInput,
+    'font-weight': fontBold,
+    'font-style': fontStyle,
+    'text-decoration': fontUnderline,
+    'font-size': selectedFontSize + 'px',
+    'text-transform': 'capitalize' }"> 
+               
+    <div class="sidebar" >
+      {{ data | json }}
+      <div id="parent">
+        <div class="red">
+          <img id="certificate" [src]="url" alt=""  
+          
+/>
+        </div>
+        <div 
+          id="text"
+          class="green"
+          cdkDrag
+          [cdkDragDisabled] ="setPosition"
+          cdkDragBoundary=".sidebar"
+        >
+          Footnav
+        </div>
+      </div>
+    </div>
+    </kendo-pdf-export>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<div class="main" style="padding: 10px; height: 97vh;   display: flex;
+align-items: center;
+justify-content: center;
+" >
+  <mat-sidenav-container style=" padding: 5px;  background: white; width: 100%;  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  ); border-radius: 5px;">
+    <mat-sidenav  style="  background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    );" #sidenav mode="side" opened><form [formGroup]="myForm">
+
+      
+<h4>Select Certificate</h4>
+
+  <input type="file"  accept="image/png, image/gif, image/jpeg" (change)="selectFile($event)" formControlName="image"/>
+  <hr>
+
+<h4>Upload Excel Sheet</h4>
+<input type="file" accept=".xlsx, .xls" (change)="onFileChange($event)" formControlName="sheet"/>
+<mat-form-field  class="example" appearance="fill">
+  <mat-label>Select the Sheet</mat-label>
+  <mat-select   formControlName="sheet" [(value)]="selectedSheet" (selectionChange)="selectChange()" >
+    <mat-option *ngFor="let sheetlist of sheetlists | keyvalue"  [value]="sheetlist.key"> {{ sheetlist.value }} </mat-option>
+  </mat-select>
+
+</mat-form-field>
+<button class="button" (click)="salutation()">Title</button>
+
+<h4 class="elv" >  Resize Certificate</h4>
+<div class="select" style="font-size: 16px">
+  <mat-form-field class="example-full-width">
+    <input  matInput type="number" maxlength="4" placeholder="Height" #height />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input   matInput type="number" maxlength="4" placeholder="Width"  #width />
+  </mat-form-field>
+  <button class="button"  (click)='resize(height.value, width.value)' >Resize</button>
+
+</div>
+
+<hr>
+
+<h4  class="elv" > Select Fonts</h4>
+<mat-form-field  class="example" >
+  <input type="text"
+         placeholder="Select a font"
+     
+         matInput
+         formControlName="fonts" 
+          #inputval
+         [matAutocomplete]="auto">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option
+    *ngFor="let fonts of filteredOptions"
+    [value]="fonts"
+    >{{ fonts }}</mat-option
+  >
+  </mat-autocomplete>
+
+</mat-form-field>
+
+<button class="button" (click)="update(inputval.value)" >change</button>
+
+<p>Upload Custom Font</p>
+<input id="fontss" type="file" (change)="selectFont($event)" >
+<hr>
+<h4>Edit Font</h4>
+<div >
+  <button (click)="bold()">
+    <img src="../assets/icons8-bold-60.png" class="img" alt="">
+  </button>
+  <button (click)="italic()">
+   <img src="../assets/icons8-italic-60.png" class="img" alt="">
+  </button>
+  <button (click)="underline()">
+   <img src="../assets/icons8-underline-60.png" class="img" alt="">
+  </button>
+
+  <mat-form-field appearance="fill" class="example-full">
+    <mat-label>Size</mat-label>
+    <mat-select [(value)]="selectedFontSize">
+      <mat-option
+        *ngFor="let fontsize of fontSizes"
+        [value]="fontsize"
+        >{{ fontsize }}</mat-option
+      >
+    </mat-select>
+  </mat-form-field>
+  <button (click)="setposition()" > set position </button>
+
+</div>
+  <div class="select" style="font-size: 16px">
+  <mat-form-field class="example">
+    <mat-label>Color</mat-label>
+    <input
+      matInput
+      type="text"
+      
+      placeholder="Color"
+      #colors
+     
+      
+    />
+  </mat-form-field>
+  <button class="button" (click)="color(colors.value)" >color</button>
+  </div>
+
+
+</form>
+
+<p #pdfNames id="pdfnames" style="visibility: hidden"></p>
+
+
+
+<button
+id="clickMe"
+class="k-button"
+(click)="pdf.saveAs(pdfNames.innerHTML)"
+style="visibility: hidden"
+></button>
+
+    </mat-sidenav>
+
+    <mat-sidenav-content id="sidebar">
+
+  
+      <button  (click)="rotate()">r</button>
+      
+<button (click)="exportss()">Export as PDF</button>
+<kendo-pdf-export id="mello"  #pdf paperSize="auto" margin="0" [ngStyle]="{ 
+'font-weight': fontBold,
+'font-style': fontStyle,
+'text-decoration': fontUnderline,
+'font-size': selectedFontSize + 'px',
+'text-transform': 'capitalize' }"> 
+           
+<div class="sidebar" >
+  {{ fontFamilyInput }}
+  <div id="parent">
+    <div class="red">
+      <img id="certificate" [src]="url" alt=""  
+      
+/>
+    </div>
+    <div 
+    id="text" 
+      class="green"
+      cdkDrag
+      [cdkDragDisabled] ="setPosition"
+      cdkDragBoundary=".sidebar"
+    >
+     FootBana
+    </div>
+  </div>
+</div>
+</kendo-pdf-export>
+
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
